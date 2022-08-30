@@ -7,7 +7,7 @@ spark = SparkSession.builder \
     .appName('spark_hdfs_to_hdfs') \
     .getOrCreate()
 
-sc = spak.sparkContext
+sc = spark.sparkContext
 sc.setLogLevel("WARN")
 
 log_files_rdd = sc.textFile(f'hdfs://{MASTER_NODE_INSTANCE_NAME}/data/logs_example/*')
