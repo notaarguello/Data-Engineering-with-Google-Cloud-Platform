@@ -14,7 +14,7 @@ log_files_rdd = sc.textFile(f'hdfs://{MASTER_NODE_INSTANCE_NAME}/data/logs_examp
 splitted_rdd = log_files_rdd.map(lambda x: x.split(" "))
 selected_col_rdd = splitted_rdd.map(lambda x: (x[0], x[3], x[5], x[6]))
 
-columns = ["ip","date","method","url"]
+columns = ["ip_2","date","method","url"]
 logs_df = selected_col_rdd.toDF(columns)
 logs_df.createOrReplaceTempView('logs_df')
 
