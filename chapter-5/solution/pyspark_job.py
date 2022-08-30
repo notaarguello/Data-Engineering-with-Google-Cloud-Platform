@@ -1,7 +1,7 @@
 from pyspark.sql import SparkSession
 
 
-MASTER_NODE_INSTANCE_NAME="[packt-dataproc-cluster-m]"
+MASTER_NODE_INSTANCE_NAME="packt-dataproc-cluster-m"
 
 spark = SparkSession.builder \
     .appName('spark_hdfs_to_hdfs') \
