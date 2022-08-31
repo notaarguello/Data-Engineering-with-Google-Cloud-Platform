@@ -30,4 +30,12 @@ article_count_df = spark.sql(sql)
 print(" ### Get only articles and blogs records ### ")
 article_count_df.show(5)
 
-article_count_df.write.save(f'gs://{BUCKET_NAME}/from-git/chapter-5/job-result/article_count_df', format='csv', mode='overwrite')
+# write back to gcs
+#article_count_df.write.save(f'gs://{BUCKET_NAME}/from-git/chapter-5/job-result/article_count_df', format='csv', mode='overwrite')
+
+# write to BQ table
+article_count_df.write.format('bigquery') \
+    .option('temporaryGcsBucket', BUCKET_NAME) \
+    .option('table', 'dwh_bikesharing.article_count_df') \
+    .mode('overwrite') \
+    .save()
