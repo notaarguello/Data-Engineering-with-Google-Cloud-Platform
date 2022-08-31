@@ -1,16 +1,16 @@
 from pyspark.sql import SparkSession
 
 
-MASTER_NODE_INSTANCE_NAME="packt-dataproc-cluster-m"
+BUCKET_NAME="packt-gcp-data-eng-notaarg-data-bucket"
 
 spark = SparkSession.builder \
-    .appName('spark_hdfs_to_hdfs') \
+    .appName('spark_gcs_to_gcs') \
     .getOrCreate()
 
 sc = spark.sparkContext
 sc.setLogLevel("WARN")
 
-log_files_rdd = sc.textFile(f'hdfs://{MASTER_NODE_INSTANCE_NAME}/data/logs_example/*')
+log_files_rdd = sc.textFile(f'gs://{BUCKET_NAME}/from-git/chapter-5/dataset/logs_example/*')
 splitted_rdd = log_files_rdd.map(lambda x: x.split(" "))
 selected_col_rdd = splitted_rdd.map(lambda x: (x[3], x[5], x[6]))
 
@@ -30,4 +30,4 @@ article_count_df = spark.sql(sql)
 print(" ### Get only articles and blogs records ### ")
 article_count_df.show(5)
 
-article_count_df.write.save(f'hdfs://{MASTER_NODE_INSTANCE_NAME}/data/logs_example/*', format='csv', mode='overwrite')
+article_count_df.write.save(f'gs://{BUCKET_NAME}/from-git/chapter-5/job-result/article_count_df', format='csv', mode='overwrite')
