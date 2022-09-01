@@ -36,6 +36,5 @@ article_count_df.show(5)
 # write to BQ table
 article_count_df.write.format('bigquery') \
 .option('temporaryGcsBucket', BUCKET_NAME) \
-.option('table', 'dwh_bikesharing.article_count_df') \
 .mode('overwrite') \
-.save()
+.save('packt-gcp-data-eng-notaarg.dwh_bikesharing.article_count_df')
