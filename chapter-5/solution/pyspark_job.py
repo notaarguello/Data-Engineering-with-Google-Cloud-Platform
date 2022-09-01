@@ -1,7 +1,7 @@
 from pyspark.sql import SparkSession
 
 
-BUCKET_NAME="packt-gcp-data-eng-notaarg-data-bucket"
+BUCKET_NAME="packt-data-eng-on-gcp-data-bucket2"
 
 spark = SparkSession.builder \
     .appName('spark_gcs_to_gcs') \
